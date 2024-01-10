@@ -22,6 +22,13 @@ const AddEmployee = () => {
         }
       }).catch(err => console.log(err))
     }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:3000/auth/add_employee')
+        .then(result => console.log(result.data))
+        .catch(err => console.log(err))
+    }
   return (
     <div className='d-flex justify-content-center align-items-center mt-3'>
       <div className='p-3 rounded w-50 border'>
@@ -93,7 +100,7 @@ const AddEmployee = () => {
               Category
             </label>
             <select name='category' id='category' className='form-select'
-            onChange={(e) => setEmployee({...employee, category: e.target.value})}>
+            onChange={(e) => setEmployee({...employee, category_id: e.target.value})}>
                 {category.map(c => {
                     return <option value={c.id}>{c.name}</option>
                 })}
