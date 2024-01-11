@@ -25,7 +25,7 @@ const AddEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/auth/add_employee')
+        axios.post('http://localhost:3000/auth/add_employee', employee)
         .then(result => console.log(result.data))
         .catch(err => console.log(err))
     }
