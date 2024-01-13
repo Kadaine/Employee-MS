@@ -62,4 +62,12 @@ router.post('/add_employee', (req, res) => {
     })
 })
 
+router.get('/employee', (req, res) => {
+    const sql = 'SELECT * FROM employee'
+    con.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error: 'Query Error'})
+        return res.json({Status: true, Result: result})
+    })
+})
+
 export { router as adminRouter }

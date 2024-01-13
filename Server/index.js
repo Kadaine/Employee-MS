@@ -10,7 +10,8 @@ app.use(cors({
 }))
 app.use(express.json()) //Use to convert information obtain from the frontend into json
 app.use('/auth', adminRouter)
+app.use(express.static('Public'))
 
 app.listen(3000, () => {
     console.log("Server is running")
-})  
+})
