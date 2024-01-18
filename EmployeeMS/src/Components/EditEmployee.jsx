@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -16,6 +16,7 @@ const EditEmployee = () => {
     })
 
     const [category, setCategory] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get('http://localhost:3000/auth/category')
@@ -33,18 +34,23 @@ const EditEmployee = () => {
                 ...employee,
                 name: result.data.Result[0].name,
                 email: result.data.Result[0].email,
-                addressress: result.data.Result[0].addressress,
+                address: result.data.Result[0].address,
                 salary: result.data.Result[0].salary,
+                category_id: result.data.Result[0].category_id
             })
 
           }).catch(err => console.log(err))
     }, [])
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put('hhtp://localhost:3000/auth/edit_employee/'+id, employee)
+        axios.put('http://localhost:3000/auth/edit_employee/'+id, employee)
         .then(result => {
-            console.log(result.data)
+            if(result.data.Status) {
+                navigate('/dashboard/employee') 
+             } else {
+                console.log(result.data.Error)
+             }
         }).catch(err => console.log(err))
 
     }
