@@ -29,7 +29,6 @@ const AddEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(employee.category_id)
         const formData = new FormData()
         formData.append('name', employee.name)
         formData.append('email', employee.email)
@@ -40,12 +39,11 @@ const AddEmployee = () => {
         formData.append('category_id', employee.category_id)
         axios.post('http://localhost:3000/auth/add_employee', formData)
         .then(result => {
-            console.log(result.data.Status)
-            if(result.data.Status) {
-                navigate('/dashboard/employee') 
-             } else {
-                console.log(result.data.Error)
-             }
+          if(result.data.Status) {
+              navigate('/dashboard/employee') 
+          } else {
+              console.log(result.data.Error)
+          }
         })
         .catch(err => console.log(err))
     }
